@@ -20,13 +20,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
-
-
-
-
-
-
-
 public class Screen extends JPanel implements ActionListener, KeyListener
 {
     //Projectile
@@ -561,7 +554,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                     //ENEMY
                     for(int k2=0; k2<enemyArray4.length; k2++)
                     {
-                        enemyArray4[k2].checkCollision(p1);
+                        enemyArray4[k2].checkCollisionBoss(p1);
                     }
 
                     //OBSTACLES

@@ -20,6 +20,8 @@ public class Enemy extends JPanel
      
     int width;
     int height;
+
+    int bossHealth;
      
      
     Color green;
@@ -44,6 +46,8 @@ public class Enemy extends JPanel
          
  
         this.green = new Color(0,255,00);
+
+        this.bossHealth = 50;
 
         //ENEMY BIRD LEVEL 1-2
         try
@@ -127,10 +131,6 @@ public class Enemy extends JPanel
      
     public void checkCollision(Projectile p)
     {
-
-
-
-
         if( this.visible == true && p.getVisible() == true)
 		{
 			
@@ -148,6 +148,29 @@ public class Enemy extends JPanel
 			}
 		}
 		
+    }
+
+    public void checkCollisionBoss(Projectile p)
+    {
+    		double pX = p.getX();
+			double pY = p.getY();
+			int pWidth = p.getWidth();
+			int pHeight = p.getHeight();
+			//System.out.println(pX);
+			if( pX + pWidth >= x && pX <= x + width 
+				&& pY + pHeight >= y && pY <= y + height )
+			{
+				bossHealth --;
+				System.out.println("Collision");
+				this.enemySound();
+
+				if (bossHealth == 0)
+				{
+					visible = false;
+				}
+			}
+
+			
     }
 
     public void animate()
