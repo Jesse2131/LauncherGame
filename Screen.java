@@ -20,8 +20,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
-
-
 public class Screen extends JPanel implements ActionListener, KeyListener
 {
     //Projectile
@@ -33,9 +31,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener
     Enemy[] enemyArray3;
     Enemy[] enemyArray4;
 
-
     //Obstacles
-    Obstacles o1;
     Obstacles[] obstaclesArrayL1;
     Obstacles[] obstaclesArrayL2;
     Obstacles[] obstaclesArrayL3;
@@ -53,8 +49,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
     //For default angle/mag
     Double userAngle = 0.0;
     Double userMag = 0.0;
-
-
 
     //BACKGROUNDS
     private BufferedImage backgroundL1;
@@ -80,13 +74,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
         
     boolean moveball = false;
 
-
-
-
-
-
-
-
     public boolean checkEnemyVisible(Enemy e[])
     {
         boolean a = false;
@@ -97,20 +84,10 @@ public class Screen extends JPanel implements ActionListener, KeyListener
         return a;
     }
 
-
-
-
-
-
-
-
     public void reloadLevel()
     {
         synchronized(this)
         {
-
-        
-            //Level 1 Enemys
             switch(level)
             {
                 case 1:
@@ -122,9 +99,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         enemyArray[i] = new Enemy(x,y);
                     }
 
-
-
-
                     //Level 1 Obstacles
                     obstaclesArrayL1 = new Obstacles[1];
                     for(int k=0; k<obstaclesArrayL1.length; k++)
@@ -132,12 +106,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         obstaclesArrayL1[k] = new Obstacles(300,250);
                     }
                     break;
-
-
-
-
-                case 2:
-                    //LEVEL 2 ENEMY
+                case 2: //LEVEL 2 ENEMY                  
                     //System.out.println("======"+level);
                     enemyArray2 = new Enemy[4];
                     for(int i=0; i<enemyArray2.length; i++)
@@ -155,12 +124,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         obstaclesArrayL2[i] = new Obstacles(x,y);
                     }
                     break;
-
-
-
-
-                case 3:
-                    //LEVEL 3 ENEMY
+                case 3: //LEVEL 3 ENEMY                   
                     //System.out.println("reloadLevel" + level);
                     enemyArray3 = new Enemy[5];
                     for(int i=0; i<enemyArray3.length; i++)
@@ -169,7 +133,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         int y = 100+i*50;
                         enemyArray3[i] = new Enemy(x,y);
                     }
-
                     //LEVEL 3 OBSTACLES
                     obstaclesArrayL3 = new Obstacles[2];
                     for(int i=0; i<obstaclesArrayL3.length; i++)
@@ -179,9 +142,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         obstaclesArrayL3[i] = new Obstacles(x,y);
                     }
                     break;
-
-                case 4:
-                    //BOSS LEVEL
+                case 4: //BOSS LEVEL
                     //System.out.println("case 4");
                     enemyArray4 = new Enemy[1];
                     for(int i=0; i<enemyArray4.length; i++)
@@ -199,64 +160,45 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         int y = 290;
                         obstaclesArrayL4[i] = new Obstacles(x,y);
                     }
-                    break;
-                
+                    break;         
             }
-
-
-
-
-
 
         }   
-
-
-
-
     }
 
-
     public Screen()
-    {
-       
-   
-        if(level <= 4 && level >= 1)
-            {
-                //BUTTONS AND TEXTFIELDS
+    {  
+        if( (level <= 4 ) && (level >= 1))
+		{
+			//BUTTONS AND TEXTFIELDS
 
-                setLayout(null);
-                //LAUNCH BUTTON
-                launchButton = new JButton("Launch");
-                launchButton.setBounds(45,130,77,20);
-                add(launchButton);
-                launchButton.addActionListener(this);
-                //ANGLE TEXTFIELD
-                setAngle = new JTextField(20);
-                setAngle.setBounds(5,70,60,25);
-                add( setAngle );
-                //MAG TEXTFIELD
-                setMag = new JTextField(20);
-                setMag.setBounds(103,70,60,25);
-                add( setMag );
-            }
+			setLayout(null);
+			//LAUNCH BUTTON
+			launchButton = new JButton("Launch");
+			launchButton.setBounds(45,130,77,20);
+			add(launchButton);
+			launchButton.addActionListener(this);
+			//ANGLE TEXTFIELD
+			setAngle = new JTextField(20);
+			setAngle.setBounds(5,70,60,25);
+			add( setAngle );
+			//MAG TEXTFIELD
+			setMag = new JTextField(20);
+			setMag.setBounds(103,70,60,25);
+			add( setMag );
+		}
 
         p1 = new Projectile(59, 469);
-
         p1.setVelocity(userAngle,userMag);
-
 
         reloadLevel();
 
-
         //ENDGAME BACKGROUND
-        endGameBD = new ImageIcon("Endgame.gif").getImage();
-        
+        endGameBD = new ImageIcon("Endgame.gif").getImage();       
  
         addKeyListener(this);
-        setFocusable(true);
-    
+        setFocusable(true);   
     }
-
 
     public Dimension getPreferredSize() 
     {
@@ -267,277 +209,208 @@ public class Screen extends JPanel implements ActionListener, KeyListener
     public void cannonsound()
     {
         try
-         {
-            URL url = this.getClass().getClassLoader().getResource("cannon.wav");
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(url));
-            clip.start();
-         }
-         catch (Exception exc)
-         {
-             exc.printStackTrace(System.out);
-         }
+		{
+			URL url = this.getClass().getClassLoader().getResource("cannon.wav");
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(url));
+			clip.start();
+		}
+		catch (Exception exc)
+		{
+			exc.printStackTrace(System.out);
+		}
     }
 
-
-
-
     public void paintComponent(Graphics g)
-    {
-         
+    {        
         super.paintComponent(g);
- 
-            //LEVEL 1 BACKGROUND
-            if(level == 1)
-            {
-                //System.out.println("==========="+level);
-                try
-                {
-                    backgroundL1 = ImageIO.read(new File("Level1.png"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+ 		
+		if(level == 1) //LEVEL 1 BACKGROUND
+		{
+			//System.out.println("==========="+level);
+			try
+			{
+				backgroundL1 = ImageIO.read(new File("Level1.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}   
+		else if(level == 2)//LEVEL 2 BACKGROUND
+		{
+			//System.out.println("==========="+level);
+			try
+			{
+				backgroundL2 = ImageIO.read(new File("Level2.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			repaint();
+		}          
+		else if(level == 3) //LEVEL 3 BACKGROUND
+		{
+			try
+			{
+				backgroundL3 = ImageIO.read(new File("Level3.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
+		else if(level == 4) //BOSS BACKGROUND
+		{
+			try
+			{
+				backgroundBoss = ImageIO.read(new File("BossBackground.jpg"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		try  //LAUNCH PAD(LEVELS 1 AND 2)
+		{
+			launchPad = ImageIO.read(new File("LaunchPad.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		try  //LAUNCHPAD(LEVEL 3)
+		{
+			launchPadL3 = ImageIO.read(new File("LaunchPadL3.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		try
+		{
+			launchPadL3Pt2 = ImageIO.read(new File("launchPadL3Pt2.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		//LAUNCHPAD(BOSS LEVEL)
+		try
+		{
+			launchPadBoss = ImageIO.read(new File("LaunchPadBoss.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-            //LEVEL 2 BACKGROUND
-            else if(level == 2)
-            {
-                //System.out.println("==========="+level);
-                try
-                {
-                    backgroundL2 = ImageIO.read(new File("Level2.png"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                repaint();
-            }
+		synchronized(this)
+		{	
+			if(level == 1)//LEVEL 1 OBJECTS
+			{
+				//BACKGROUND
+				g.drawImage(backgroundL1,0,0,null);
+				//LAUNCH PAD
+				g.drawImage(launchPad,20,470,null);
 
+				//ENEMY
+				for(int i=0; i<enemyArray.length; i++)
+				{
+					enemyArray[i].drawMe(g);
+				}
+				//OBSTACLES
+				for(int i2=0; i2<obstaclesArrayL1.length; i2++)
+				{
+					obstaclesArrayL1[i2].drawMe(g);
+				}
+			}
+			else if(level == 2) //LEVEL 2 OBJECTS
+			{				
+				//BACKGROUND 
+				g.drawImage(backgroundL2,0,0,null);
+				//LAUNCH PAD
+				g.drawImage(launchPad,20,470,null);
+		  
+				//ENEMY
+				for(int i=0; i<enemyArray2.length; i++)
+				{
+					enemyArray2[i].drawMe(g);
+				}
+	 
+				//OBSTACLES
+				for(int i2=0; i2<obstaclesArrayL2.length; i2++)
+				{
+					obstaclesArrayL2[i2].drawMe2(g);
+				}
+			}	
+			else if(level == 3)  //LEVEL 3 OBJECTS
+			{
+				//BACKGROUND
+				g.drawImage(backgroundL3,0,0,null);
+				//LAUNCH PAD
+				g.drawImage(launchPadL3,-60,480,null);
+				g.drawImage(launchPadL3Pt2,43,473,null);
 
+				//ENEMY
+				for(int i=0; i<enemyArray3.length; i++)
+				{
+					enemyArray3[i].drawMe3(g);
+				}
 
+				//OBSTACLES
+				for(int i2=0; i2<obstaclesArrayL3.length; i2++)
+				{
+					obstaclesArrayL3[i2].drawMe3(g);
+				}
+			}	
+			else if(level == 4) //BOSS LEVEL OBJECTS
+			{
+				//BACKGROUND
+				g.drawImage(backgroundBoss,0,0,null);
 
-            //LEVEL 3 BACKGROUND
-            else if(level == 3)
-            {
-                try
-                {
-                    backgroundL3 = ImageIO.read(new File("Level3.png"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            
-            //BOSS BACKGROUND
-            else if(level == 4)
-            {
-                try
-                {
-                    backgroundBoss = ImageIO.read(new File("BossBackground.jpg"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+				//LAUNCHPAD
+				g.drawImage(launchPadBoss,-70,470,null);
 
+				//ENEMY
+				for(int i=0; i<enemyArray4.length; i++)
+				{
+					enemyArray4[i].drawMe4(g);
+				}
 
-
-
-
-            //LAUNCH PAD(LEVELS 1 AND 2)
-            try
-            {
-                launchPad = ImageIO.read(new File("LaunchPad.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //LAUNCHPAD(LEVEL 3)
-            try
-            {
-                launchPadL3 = ImageIO.read(new File("LaunchPadL3.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try
-            {
-                launchPadL3Pt2 = ImageIO.read(new File("launchPadL3Pt2.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //LAUNCHPAD(BOSS LEVEL)
-            try
-            {
-                launchPadBoss = ImageIO.read(new File("LaunchPadBoss.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            synchronized(this)
-            {
-                //LEVEL 1 OBJECTS
-                if(level == 1)
-                {
-                    //BACKGROUND
-                    g.drawImage(backgroundL1,0,0,null);
-                    //LAUNCH PAD
-                    g.drawImage(launchPad,20,470,null);
-
-                    //ENEMY
-                    for(int i=0; i<enemyArray.length; i++)
-                    {
-                        enemyArray[i].drawMe(g);
-                    }
-
-
-
-
-                    //OBSTACLES
-                    for(int i2=0; i2<obstaclesArrayL1.length; i2++)
-                    {
-                        obstaclesArrayL1[i2].drawMe(g);
-                    }
-                }
-                
-                //LEVEL 2 OBJECTS
-                else if(level == 2)
-                {
-                    
-                    //BACKGROUND 
-                    g.drawImage(backgroundL2,0,0,null);
-                    //LAUNCH PAD
-                    g.drawImage(launchPad,20,470,null);
-              
-                    //ENEMY
-                    for(int i=0; i<enemyArray2.length; i++)
-                    {
-                        enemyArray2[i].drawMe(g);
-                    }
-         
-                    //OBSTACLES
-                    for(int i2=0; i2<obstaclesArrayL2.length; i2++)
-                    {
-                        obstaclesArrayL2[i2].drawMe2(g);
-                    }
-                    //repaint();
-
-                }
-
-
-
-
-                //LEVEL 3 OBJECTS
-                else if(level == 3)
-                {
-                    //BACKGROUND
-                    g.drawImage(backgroundL3,0,0,null);
-                    //LAUNCH PAD
-                    g.drawImage(launchPadL3,-60,480,null);
-                    g.drawImage(launchPadL3Pt2,43,473,null);
-
-
-
-
-                    //ENEMY
-                    for(int i=0; i<enemyArray3.length; i++)
-                    {
-                        enemyArray3[i].drawMe3(g);
-                    }
-
-
-                    //OBSTACLES
-                    for(int i2=0; i2<obstaclesArrayL3.length; i2++)
-                    {
-                        obstaclesArrayL3[i2].drawMe3(g);
-                    }
-                    //repaint();
-                }
-                
-                //BOSS LEVEL OBJECTS
-                if(level == 4)
-                {
-                    //BACKGROUND
-                    g.drawImage(backgroundBoss,0,0,null);
-
-                    //LAUNCHPAD
-                    g.drawImage(launchPadBoss,-70,470,null);
-
-
-                    //ENEMY
-                    for(int i=0; i<enemyArray4.length; i++)
-                    {
-                        enemyArray4[i].drawMe4(g);
-                    }
-
-
-                    //OBSTACLES
-                    for(int i2=0; i2<obstaclesArrayL4.length; i2++)
-                    {
-                        obstaclesArrayL4[i2].drawMe4(g);
-                    }
-                    //repaint();
-
-                }
-
-
-                //END GAME SCREEN
-                if(level == 5)
-                {
-                    g.drawImage(endGameBD,0,0,null);
-                }
-            }
+				//OBSTACLES
+				for(int i2=0; i2<obstaclesArrayL4.length; i2++)
+				{
+					obstaclesArrayL4[i2].drawMe4(g);
+				}
+			}
+			else if(level == 5)
+			{
+				g.drawImage(endGameBD,0,0,null);
+			}
+		}
             
 
-        if(level == 1 || level == 2 || level == 3 || level == 4)
+        if ( (level >= 1 ) &&  ( level <= 4 ) )
         {
             //Draw the ball
             p1.drawMe( g );
-        }
-        
-        
-        //TEXT
-        if(level == 1 || level == 2 || level == 3 || level == 4)
-        {
+      
             //BALL TEXT
             Font font = new Font("Arial", Font.PLAIN, 20);
             g.setFont(font);
             g.setColor(Color.red);
             g.drawString("Balls Left: " + launchCount, 0, 20);
 
-            //LEVEL TEXT
+			Font font2 = new Font("Arial", Font.PLAIN, 24);
+			g.setFont(font2);
+			g.setColor(Color.blue);           
+			
             if(level == 1 || level == 2 || level == 3)
             {
-                Font font2 = new Font("Arial", Font.PLAIN, 24);
-                g.setFont(font2);
-                g.setColor(Color.blue);
                 g.drawString("Level " + level, 340,30);
             }
             else if(level == 4)
             {
-                Font font2 = new Font("Arial", Font.PLAIN, 24);
-                g.setFont(font2);
-                g.setColor(Color.blue);
                 g.drawString("Boss Level", 340,30);
             }
 
-
-            //ANGLE/MAG TEXT
+			//ANGLE/MAG TEXT
             Font font3 = new Font("Arial", Font.PLAIN, 12);
             g.setFont(font3);
             g.setColor(Color.black);
             g.drawString("Set Angle",7,110);
             g.drawString("Set Mag",110,110);
-
-        }
-        
-
-
-
-        
-        
+        }   
     }
     
     public void actionPerformed(ActionEvent e)
@@ -568,26 +441,12 @@ public class Screen extends JPanel implements ActionListener, KeyListener
             String getMagInput = setMag.getText();
             Double getMagInput2 = Double.parseDouble(getMagInput);
 
-
-
-
             this.userMag = getMagInput2;
             p1.setVelocity(userAngle,userMag);
 
-
-
-
-
-
             requestFocus();
-
-
-
-
         }
     }
-     
-     
      
     public void animate()
     {
@@ -600,31 +459,24 @@ public class Screen extends JPanel implements ActionListener, KeyListener
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
- 
-            if(moveball == true)
-            {
-                p1.move();
-                //System.out.println("move");
-            }
-
-
-
-
-
-
-            if(p1.stopMove == true)
-            {
-                moveball = false;
-                p1.stopMove = false;
-            }
 
             synchronized(this)
             {
-                
-                //LEVEL ONE ITEMS
+   				if(moveball == true)
+				{
+					p1.move();
+					//System.out.println("move");
+				}
+
+				if(p1.stopMove == true)
+				{
+					moveball = false;
+					p1.stopMove = false;
+				}                
+				
+				//LEVEL ONE ITEMS
                 if(level == 1)
-                {
-                       
+                {                      
                     //ENEMY
                     for(int k=0; k<enemyArray.length; k++)
                     {
@@ -638,7 +490,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         obstaclesArrayL1[k1].checkCollision(p1);
                     }
 
-
                     boolean temp =  this.checkEnemyVisible(enemyArray);
                     //System.out.println("temp === " + temp);
                     if(temp == false)
@@ -647,12 +498,10 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         reloadLevel();
                         p1.reset();
                         launchCount = 10;
-                    }
-                        
+                    }                        
                 }
-                else if(level == 2)
-                {
-                    //LEVEL2 ENEMY
+                else if(level == 2) //LEVEL2 ENEMY
+                {                    
                     for(int k2=0; k2<enemyArray2.length; k2++)
                     {
                         enemyArray2[k2].checkCollision(p1);
@@ -665,7 +514,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         //System.out.println(enemyArray[k].visible);
                     }
 
-
                     boolean temp =  this.checkEnemyVisible(enemyArray2);
                     //System.out.println("temp === " + temp);
                     if(temp == false)
@@ -675,9 +523,8 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         p1.reset();
                         launchCount = 10;
                     }
-                }
-                //LEVEL THREE ITEMS
-                else if(level == 3)
+                }                
+                else if(level == 3) //LEVEL THREE ITEMS
                 {
                     //System.out.println("======" +obstaclesArrayL3.length);
                     //ENEMY
@@ -686,14 +533,12 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         enemyArray3[k2].checkCollision(p1);
                     }
 
-
                     //OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL3.length; k3++)
                     {
                         obstaclesArrayL3[k3].checkCollision(p1);    
                         //System.out.println(enemyArray[k].visible);
                     }
-
 
                     boolean temp =  this.checkEnemyVisible(enemyArray3);
                     if(temp == false)
@@ -727,45 +572,38 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         p1.reset();
                         launchCount = 10;
                     }  
-                }
-       
-            
+                }          
             }
-            
-            
+                        
             //reloadLevel();
             repaint();
-
-
-
-
         }
- 
     }
-
 
     public void keyPressed(KeyEvent e)
     {
-        //System.out.println("keyPressed");
-        if( e.getKeyCode() == 80) //"p"
-        {
-            if( (level >= 1) || ( level <= 4 ))
-            {
-                level++;
-                System.out.println("====reload======"+level);
-                launchCount = 10;
-                reloadLevel();
+		synchronized(this)
+		{
+			if( e.getKeyCode() == 80) //"p"
+			{
+				if( (level >= 1) || ( level <= 4 ))
+				{
+					level++;
+					System.out.println("====reload======"+level);
+					launchCount = 10;
+					reloadLevel();
 
-            }
-            else if( level == 5  )
-            {
-                level++;
-                reloadLevel();
-            }
-            
-        }
+				}
+				else if( level == 5  )
+				{
+					level++;
+					reloadLevel();
+				}          
+			}		
+		}
+		
     }
+	
     public void keyReleased(KeyEvent e){}
     public void keyTyped(KeyEvent e){}
-
 }
