@@ -109,7 +109,6 @@ public class Projectile
 
 
 
-
 		//ANGLE+MAG DISPLAY
         Font font = new Font("Arial", Font.PLAIN, 12);
 		g.setFont(font);

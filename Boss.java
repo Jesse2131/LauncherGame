@@ -12,7 +12,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.Image;
  
-public class Enemy extends JPanel
+public class Boss extends JPanel
 {
     int x;
     int y;
@@ -30,10 +30,9 @@ public class Enemy extends JPanel
     Color red;
 	
 	boolean visible;
-	private BufferedImage birdImage;
-	private BufferedImage fishImage;
+    private Image drag;
 
-    public Enemy(int x, int y)
+    public Boss(int x, int y)
     {
          
         this.x = x;
@@ -46,24 +45,14 @@ public class Enemy extends JPanel
  
         this.green = new Color(0,255,00);
 
-        //ENEMY BIRD LEVEL 1-2
-        try
-        {
-            birdImage = ImageIO.read(new File("Level1Enemy.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.bossHealth = 50;
+
+
+        //BOSS
+        drag = new ImageIcon("Dragon.gif").getImage();
 
 
 
-
-        //FISH LEVEL 3
-        try
-        {
-            fishImage = ImageIO.read(new File("Level3Enemy.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 		visible = true;
          
@@ -95,29 +84,15 @@ public class Enemy extends JPanel
  
     public void drawMe(Graphics g)
     {
-        if( visible )
-		{
-			g.drawImage(birdImage, x, y, null);
-		}   
+       if( visible )
+        {
+            g.drawImage(drag, x, y, null);
+        }
     }
 
-
-
-
-    public void drawMe3(Graphics g)
+    public void checkCollisionBoss(Projectile p)
     {
-    	if( visible )
-    	{
-    		g.drawImage(fishImage,x,y,null);
-    	}
-    }
-
-    public void checkCollision(Projectile p)
-    {
-        if( this.visible == true && p.getVisible() == true)
-		{
-			
-			double pX = p.getX();
+    		double pX = p.getX();
 			double pY = p.getY();
 			int pWidth = p.getWidth();
 			int pHeight = p.getHeight();
@@ -125,13 +100,63 @@ public class Enemy extends JPanel
 			if( pX + pWidth >= x && pX <= x + width 
 				&& pY + pHeight >= y && pY <= y + height )
 			{
+				bossHealth --;
 				//System.out.println("Collision");
-				visible = false;
 				this.enemySound();
+
+				if (bossHealth == 0)
+				{
+					visible = false;
+				}
 			}
-		}
-		
+
+			
     }
+
+
+    public void move() 
+    {
+        if(y<=0)
+        {
+            ydirect = 0;
+        }
+
+        if(y>=500)
+        {
+            ydirect = 1;
+        }
+
+        if(ydirect == 1)
+        {
+            y--;
+            //System.out.println(y);
+        }
+        
+        if(ydirect == 0)
+        {
+            y++;
+            //System.out.println(y);
+        }
+ 
+    }
+    public void animate()
+    {
+     
+        while( true )
+        {
+            //Wait 
+            try{
+                Thread.sleep(100); //milliseconds
+            } catch(InterruptedException ex){
+                Thread.currentThread().interrupt();
+            }
+   
+            repaint();
+        }
+ 
+    }
+
+
 
 }
 
