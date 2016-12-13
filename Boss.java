@@ -21,6 +21,7 @@ public class Boss extends JPanel
     int width;
     int height;
 
+
     int bossHealth;
      
      
@@ -28,9 +29,10 @@ public class Boss extends JPanel
     Color black;
     Color yellow;
     Color red;
-	
-	boolean visible;
+    
+    boolean visible;
     private Image drag;
+
 
     public Boss(int x, int y)
     {
@@ -45,21 +47,17 @@ public class Boss extends JPanel
  
         this.green = new Color(0,255,00);
 
-        this.bossHealth = 50;
+
+        this.bossHealth = 60;
 
 
         //BOSS
         drag = new ImageIcon("Dragon.gif").getImage();
 
 
-
-
-		visible = true;
+        visible = true;
          
     }
-
-
-
 
     public void enemySound()
     {
@@ -75,11 +73,11 @@ public class Boss extends JPanel
              exc.printStackTrace(System.out);
         }
     }
-	
-	public boolean getVisible()
-	{
-		return visible;
-	}
+    
+    public boolean getVisible()
+    {
+        return visible;
+    }
     
  
     public void drawMe(Graphics g)
@@ -90,28 +88,33 @@ public class Boss extends JPanel
         }
     }
 
+
     public void checkCollisionBoss(Projectile p)
     {
-    		double pX = p.getX();
-			double pY = p.getY();
-			int pWidth = p.getWidth();
-			int pHeight = p.getHeight();
-			//System.out.println(pX);
-			if( pX + pWidth >= x && pX <= x + width 
-				&& pY + pHeight >= y && pY <= y + height )
-			{
-				bossHealth --;
-				//System.out.println("Collision");
-				this.enemySound();
+            double pX = p.getX();
+            double pY = p.getY();
+            int pWidth = p.getWidth();
+            int pHeight = p.getHeight();
+            //System.out.println(pX);
+            if( pX + pWidth >= x && pX <= x + width 
+                && pY + pHeight >= y && pY <= y + height )
+            {
+                bossHealth --;
+                //System.out.println("Collision");
+                this.enemySound();
 
-				if (bossHealth == 0)
-				{
-					visible = false;
-				}
-			}
 
-			
+                if (bossHealth == 0)
+                {
+                    visible = false;
+                }
+            }
+
+
+            
     }
+
+
 
 
     public void move() 
@@ -121,10 +124,12 @@ public class Boss extends JPanel
             ydirect = 0;
         }
 
+
         if(y>=500)
         {
             ydirect = 1;
         }
+
 
         if(ydirect == 1)
         {
@@ -158,103 +163,10 @@ public class Boss extends JPanel
 
 
 
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,3 +1,4 @@
+import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -8,7 +9,7 @@ import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
  
-public class Obstacles
+public class Obstacles extends JPanel
 {
     int x;
     int y;
@@ -30,7 +31,7 @@ public class Obstacles
     private BufferedImage cactusImg;
 	
 	
-    public Obstacles(int x, int y)
+    public Obstacles(int x, int y) 
     {
          
         this.x = x;
@@ -44,12 +45,6 @@ public class Obstacles
         this.brown = new Color(102,51,00);
 
 
-
-
-
-
-
-
         //TOWER
         try
         {
@@ -59,8 +54,6 @@ public class Obstacles
         }
 
 
-
-
         //POLL 
         try
         {
@@ -68,7 +61,6 @@ public class Obstacles
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
         //Coral
@@ -91,19 +83,9 @@ public class Obstacles
 
 
 
-
-
-
-
 		visible = true;
          
     }
-
-
-
-
-
-
 
 
     public void obstacleSound()
@@ -148,8 +130,6 @@ public class Obstacles
     }
 
 
-
-
     public void drawMe3(Graphics g)
     {
     	if( visible )
@@ -157,6 +137,9 @@ public class Obstacles
     		g.drawImage(coralImg,x,y,null);
     	}
     }
+
+
+
 
     public void drawMe4(Graphics g)
     {
@@ -185,23 +168,52 @@ public class Obstacles
 		
     }
     
+	public void move() 
+    {
+        if(y<=0)
+        {
+            ydirect = 0;
+        }
+
+
+        if(y>=500)
+        {
+            ydirect = 1;
+        }
+
+
+        if(ydirect == 1)
+        {
+            y--;
+            //System.out.println(y);
+        }
+        
+        if(ydirect == 0)
+        {
+            y++;
+            //System.out.println(y);
+        }
+ 
+    }
+    public void animate()
+    {
+     
+        while( true )
+        {
+            //Wait 
+            try{
+                Thread.sleep(100); //milliseconds
+            } catch(InterruptedException ex){
+                Thread.currentThread().interrupt();
+            }
+   
+            repaint();
+        }
+ 
+    }
  
  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

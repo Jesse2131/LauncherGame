@@ -16,14 +16,8 @@ public class Projectile
 	double angle;
 	double magnitude;
 
-
-
-
 	boolean stopMove = false;
  	boolean visible = true;
-
-
-
 
  	int width;
  	int height;
@@ -47,14 +41,15 @@ public class Projectile
 		this.yVel = 0;
 		this.gravity = -1;
 
-
-
 		this.width = 15;
 		this.height = 15;
          
         black = new Color(0,0,0);
 		
     }
+
+
+
 
     public void reset()
     {
@@ -73,14 +68,14 @@ public class Projectile
 		y = -0.5 *gravity*Math.pow(time,2) - yVel*time + initY;
 
 
-	if(y>600 || x>800 || y<-400 || x<0)
+
+		if(y>600 || x>800 || y<-400 || x<0)
 		{
 			reset();
 		}
 
-		//System.out.println(y);
 		
-		time = time + .1;
+		time = time + .5;
 
 
 	}
@@ -93,21 +88,13 @@ public class Projectile
 		this.yVel = this.magnitude * Math.sin(Math.toRadians(this.angle) );
 		
 
-
-
-
-		//System.out.println("new angles"+angle);
 	}	
      
- 
- 
     public void drawMe(Graphics g)
     {
 		//DRAW PROJECTILE+LAUNCHER
 		g.setColor(black);
         g.fillOval((int) Math.round(x), (int) Math.round(y), width, height);
-
-
 
 		//ANGLE+MAG DISPLAY
         Font font = new Font("Arial", Font.PLAIN, 12);
@@ -116,12 +103,6 @@ public class Projectile
 		g.drawString("Angle " + angle, 7, 60);
 		g.drawString("Magnitude " + magnitude, 100, 60);
     }
-	
-
-
-
-
-
 
 	public double getX()
     {
@@ -148,5 +129,7 @@ public class Projectile
         return visible;
     }
 }
+
+
 
 

@@ -21,6 +21,9 @@ public class Enemy extends JPanel
     int width;
     int height;
 
+
+
+
     int bossHealth;
      
      
@@ -32,6 +35,9 @@ public class Enemy extends JPanel
 	boolean visible;
 	private BufferedImage birdImage;
 	private BufferedImage fishImage;
+
+
+
 
     public Enemy(int x, int y)
     {
@@ -46,6 +52,7 @@ public class Enemy extends JPanel
  
         this.green = new Color(0,255,00);
 
+
         //ENEMY BIRD LEVEL 1-2
         try
         {
@@ -53,8 +60,6 @@ public class Enemy extends JPanel
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
 
         //FISH LEVEL 3
@@ -65,12 +70,12 @@ public class Enemy extends JPanel
             e.printStackTrace();
         }
 
+
+
+
 		visible = true;
          
     }
-
-
-
 
     public void enemySound()
     {
@@ -101,9 +106,6 @@ public class Enemy extends JPanel
 		}   
     }
 
-
-
-
     public void drawMe3(Graphics g)
     {
     	if( visible )
@@ -111,6 +113,9 @@ public class Enemy extends JPanel
     		g.drawImage(fishImage,x,y,null);
     	}
     }
+
+
+
 
     public void checkCollision(Projectile p)
     {
@@ -133,108 +138,7 @@ public class Enemy extends JPanel
 		
     }
 
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
