@@ -47,7 +47,7 @@ public class Boss extends JPanel
         this.green = new Color(0,255,00);
 
 
-        this.bossHealth = 30;
+        this.bossHealth = 5;
 
 
         //BOSS
@@ -98,6 +98,7 @@ public class Boss extends JPanel
             if( pX + pWidth >= x && pX <= x + width 
                 && pY + pHeight >= y && pY <= y + height )
             {
+                p.reset();
                 bossHealth --;
                 //System.out.println("Collision");
                 this.enemySound();

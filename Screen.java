@@ -871,20 +871,20 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                 }
                 else if(level == 4)
                 {
-                    /*
+                    
                     //MOVING BOSS
                     for(int k = 0; k<bossArray.length; k++)
                     {
                         bossArray[k].move();
                     }
-                    */
+                    
                     //ENEMY
                     for(int k2=0; k2<bossArray.length; k2++)
                     {
                         bossArray[k2].checkCollisionBoss(p1);
                     }
 
-                    /*
+                    
                     //MOVING OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL4.length; k3++)
                     {
@@ -898,7 +898,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         obstaclesArrayL4[k3].checkCollision(p1);    
                         //System.out.println(enemyArray[k].visible);
                     } 
-                    */
+                    
 
 
 
