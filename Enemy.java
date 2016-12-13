@@ -17,16 +17,14 @@ public class Enemy extends JPanel
     int x;
     int y;
     int ydirect;
-     
+    
+    //BOTH LEVEL 1 AND 2 ENEMY
     int width;
     int height;
 
+    int widthL3;
+    int heightL3;
 
-
-
-    int bossHealth;
-     
-     
     Color green;
     Color black;
     Color yellow;
@@ -46,10 +44,12 @@ public class Enemy extends JPanel
         this.y = y;
         ydirect = 1;
          
-        this.width = 30;
-        this.height = 30;
-         
- 
+        this.width = 40;
+        this.height = 40;
+
+        this.widthL3 = 49;
+        this.heightL3 = 37;
+
         this.green = new Color(0,255,00);
 
 
@@ -138,7 +138,26 @@ public class Enemy extends JPanel
 		
     }
 
-
+    public void checkCollisionL3(Projectile p)
+    {
+        if( this.visible == true && p.getVisible() == true)
+        {
+            
+            double pX = p.getX();
+            double pY = p.getY();
+            int pWidth = p.getWidth();
+            int pHeight = p.getHeight();
+            //System.out.println(pX);
+            if( pX + pWidth >= x && pX <= x + widthL3 
+                && pY + pHeight >= y && pY <= y + heightL3 )
+            {
+                //System.out.println("Collision");
+                visible = false;
+                this.enemySound();
+            }
+        }
+        
+    }
 
 
 }

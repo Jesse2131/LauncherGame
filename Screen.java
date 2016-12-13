@@ -166,8 +166,8 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                     for(int i=0; i<obstaclesArrayL2.length; i++)
                     {
                         int x = 210+i*180;
-                        int ranY = (int)(Math.random()*301+100) ;
-                        obstaclesArrayL2[i] = new Obstacles(x,ranY);
+                        int y = 150;
+                        obstaclesArrayL2[i] = new Obstacles(x,y);
                     }
                     break;
                 case 3: 
@@ -231,9 +231,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         
             }
 
-
-
-
         }   
     }
 
@@ -242,9 +239,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
 
     public Screen()
     {  
-
-
-
 
         setLayout(null);
 
@@ -581,9 +575,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
             {
                 g.drawImage(endGameBD,0,0,null);
 
-
-
-
                 //BALL TEXT
                 Font font = new Font("Impact", Font.BOLD, 80);
                 g.setFont(font);
@@ -637,6 +628,10 @@ public class Screen extends JPanel implements ActionListener, KeyListener
     
     public void actionPerformed(ActionEvent e)
     {
+        if(moveball == false)
+        {
+
+        
             if(level >=1 && level <= 4)
             {
                     if( e.getActionCommand().equals("Launch") )
@@ -671,9 +666,6 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         moveball = true;
                     }
 
-
-
-
                     //System.out.println(launchCount);
 
 
@@ -700,6 +692,7 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                     this.userMag = getMagInput2;
                     p1.setVelocity(userAngle,userMag);
             }
+        }
             
         
 
@@ -773,13 +766,13 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         //System.out.println(enemyArray[k].visible);
                     }
 
-
+                    
                     //MOVING OBSTACLES
                     for(int k1=0; k1<obstaclesArrayL1.length; k1++)
                     {
                         obstaclesArrayL1[k1].move();
                     }
-                
+                    
                     //Level 1 obstacles
                     for(int k1=0; k1<obstaclesArrayL1.length; k1++)
                     {
@@ -810,18 +803,17 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                         enemyArray2[k2].checkCollision(p1);
                     }
 
-
+                    
                     //MOVING OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL2.length; k3++)
                     {
                         obstaclesArrayL2[k3].move();    
-                        
                     }
                     
                     //LEVEL2 OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL2.length; k3++)
                     {
-                        obstaclesArrayL2[k3].checkCollision(p1);    
+                        obstaclesArrayL2[k3].checkCollisionL2(p1);    
                         //System.out.println(enemyArray[k].visible);
                     }
 
@@ -845,10 +837,10 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                     //ENEMY
                     for(int k2=0; k2<enemyArray3.length; k2++)
                     {
-                        enemyArray3[k2].checkCollision(p1);
+                        enemyArray3[k2].checkCollisionL3(p1);
                     }
 
-
+                    
                     //MOVING OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL3.length; k3++)
                     {
@@ -856,10 +848,11 @@ public class Screen extends JPanel implements ActionListener, KeyListener
 
 
                     }
+                    
                     //OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL3.length; k3++)
                     {
-                        obstaclesArrayL3[k3].checkCollision(p1);    
+                        obstaclesArrayL3[k3].checkCollisionL3(p1);    
                         //System.out.println("-----"+obstaclesArrayL3.length);
                     }
 
@@ -878,32 +871,34 @@ public class Screen extends JPanel implements ActionListener, KeyListener
                 }
                 else if(level == 4)
                 {
-                    
+                    /*
                     //MOVING BOSS
                     for(int k = 0; k<bossArray.length; k++)
                     {
                         bossArray[k].move();
                     }
-                    
+                    */
                     //ENEMY
                     for(int k2=0; k2<bossArray.length; k2++)
                     {
                         bossArray[k2].checkCollisionBoss(p1);
                     }
 
-
+                    /*
                     //MOVING OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL4.length; k3++)
                     {
                         obstaclesArrayL4[k3].move();    
                     } 
+                    
+
                     //OBSTACLES
                     for(int k3=0; k3<obstaclesArrayL4.length; k3++)
                     {
                         obstaclesArrayL4[k3].checkCollision(p1);    
                         //System.out.println(enemyArray[k].visible);
                     } 
-
+                    */
 
 
 

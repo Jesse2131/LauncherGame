@@ -17,6 +17,12 @@ public class Obstacles extends JPanel
      
     int width;
     int height;
+
+    int widthL2;
+    int heightL2;
+
+    int widthL3;
+    int heightL3;
      
      
     Color brown;
@@ -38,8 +44,14 @@ public class Obstacles extends JPanel
         this.y = y;
         ydirect = 1;
          
-        this.width = 20;
-        this.height = 200;
+        this.width = 165;
+        this.height = 263;
+
+        this.widthL2 = 150;
+        this.heightL2 = 300;
+
+        this.widthL3 = 128;
+        this.widthL3 = 351;
          
  
         this.brown = new Color(102,51,00);
@@ -166,6 +178,44 @@ public class Obstacles extends JPanel
 			}
 		}
 		
+    }
+
+    public void checkCollisionL2(Projectile p)
+    {
+        if( visible == true && p.getVisible() == true)
+        {
+            Double pX = p.getX();
+            Double pY = p.getY();
+            int pWidth = p.getWidth();
+            int pHeight = p.getHeight();
+             
+            if( pX + pWidth >= x && pX <= x + widthL2 
+                && pY + pHeight >= y && pY <= y + heightL2 )
+            {
+                p.reset();
+                this.obstacleSound();
+            }
+        }
+        
+    }
+
+    public void checkCollisionL3(Projectile p)
+    {
+        if( visible == true && p.getVisible() == true)
+        {
+            Double pX = p.getX();
+            Double pY = p.getY();
+            int pWidth = p.getWidth();
+            int pHeight = p.getHeight();
+             
+            if( pX + pWidth >= x && pX <= x + widthL3 
+                && pY + pHeight >= y && pY <= y + heightL3 )
+            {
+                p.reset();
+                this.obstacleSound();
+            }
+        }
+        
     }
     
 	public void move() 

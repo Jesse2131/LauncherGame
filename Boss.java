@@ -41,14 +41,13 @@ public class Boss extends JPanel
         this.y = y;
         ydirect = 1;
          
-        this.width = 30;
-        this.height = 30;
-         
- 
+        this.width = 179;
+        this.height = 172;
+
         this.green = new Color(0,255,00);
 
 
-        this.bossHealth = 60;
+        this.bossHealth = 30;
 
 
         //BOSS
